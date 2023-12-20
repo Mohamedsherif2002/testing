@@ -1,16 +1,4 @@
-<?php
-  $page_title = 'All Group';
-  require_once('includes/load.html');
-  // Checkin What level user has permission to view this page
-   page_require_level(1);
-  $all_groups = find_all('user_groups');
-?>
-<?php include_once('layouts/header.html'); ?>
-<div class="row">
-   <div class="col-md-12">
-     <?php echo display_msg($msg); ?>
-   </div>
-</div>
+
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-default">

@@ -7,30 +7,8 @@
     <title>Payment</title>
 </head>
 <body>
-<?php
 
-$page_title = 'Payment';
-require_once('includes/load.html');
-include_once('layouts/header.html');
-?>
 
-<?php
-
-if ( isset($_SESSION['finalTotal'])) {
-    
-    $finalTotal = $_SESSION['finalTotal']; // Retrieve the value from the session
-} else {
-    echo "Final total not set!";
-}
-$tax = "SELECT value FROM taxes WHERE id = 1";
-$taxes = $conn->query($tax);
-
-if ($taxes) {
-    $taxValue = $taxes->fetch_assoc()['value'];
-} else {
-    $taxValue = 0; // Default value if the query fails
-}
-?>
 <form method="post" action="process_payment.html">
 <section class="h-100 h-custom">
     <div class="container py-5 h-100">

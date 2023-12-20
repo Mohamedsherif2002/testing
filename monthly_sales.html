@@ -1,14 +1,4 @@
-<?php
-  $page_title = 'Monthly Sales';
-  require_once('includes/load.html');
-  // Checkin What level user has permission to view this page
-   page_require_level(2);
-?>
-<?php
- $year = date('Y');
- $sales = monthlySales($year);
-?>
-<?php include_once('layouts/header.html'); ?>
+
 <div class="row">
   <div class="col-md-6">
     <?php echo display_msg($msg); ?>

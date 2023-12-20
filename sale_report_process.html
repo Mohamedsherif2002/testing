@@ -1,29 +1,4 @@
-<?php
-$page_title = 'Sales Report';
-$results = '';
-  require_once('includes/load.html');
-  // Checkin What level user has permission to view this page
-   page_require_level(2);
-?>
-<?php
-  if(isset($_POST['submit'])){
-    $req_dates = array('start-date','end-date');
-    validate_fields($req_dates);
 
-    if(empty($errors)):
-      $start_date   = remove_junk($db->escape($_POST['start-date']));
-      $end_date     = remove_junk($db->escape($_POST['end-date']));
-      $results      = find_sale_by_dates($start_date,$end_date);
-    else:
-      $session->msg("d", $errors);
-      redirect('sales_report.html', false);
-    endif;
-
-  } else {
-    $session->msg("d", "Select dates");
-    redirect('sales_report.html', false);
-  }
-?>
 <!doctype html>
 <html lang="en-US">
  <head>

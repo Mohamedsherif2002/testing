@@ -4,43 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="libs/css/main.css">
-    <?php
-    $page_title = 'Feedbacks';
-    require_once('includes/load.html');
-    include_once('layouts/header.html');
-    ?>
-    <?php
-    page_require_level(3);
-
-
-
-    if (isset($_POST['Delete_feedback'])) {
-        $feedback_id = $_POST['feedback_id']; // Change 'name' to 'feedback_id'
     
-        // Establish a database connection
-        $conn = mysqli_connect("localhost", "root", "", "inventory_system");
-    
-        // Create a SQL query to delete the feedback with the specified ID
-        $deleteQuery = "DELETE FROM conatacts WHERE id = $feedback_id";
-    
-        // Execute the query
-        $deleteResult = mysqli_query($conn, $deleteQuery);
-    
-        if ($deleteResult) {
-            // The feedback was successfully deleted
-            // You can display a success message here if needed
-        } else {
-            // Handle any errors that may occur during the query
-            echo "Error: " . mysqli_error($conn);
-        }
-    
-        // Close the database connection
-        mysqli_close($conn);
-    }
-    
-    
-    
-    ?>
     <!-- //Bootstrap CDN -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"

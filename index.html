@@ -10,16 +10,7 @@
     <link rel="stylesheet" href="libs/css/main.css" >
 </head>
 <body>
-<?php
-ob_start();
-require_once('includes/load.html');
 
-if ($session->isUserLoggedIn(true)) {
-    redirect('home.html', false);
-}
-
-// include_once('layouts/header.html');
-?>
 <div class="login-page">
     <div class="text-center">
         <h1>Login Panel</h1>
@@ -47,8 +38,6 @@ if ($session->isUserLoggedIn(true)) {
         </div>
     
 </div>
-
-<?php include_once('layouts/footer.html'); ?>
 
 </body>
 </html>

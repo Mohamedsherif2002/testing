@@ -9,73 +9,7 @@
     
 </head>
 <body class="sidepanel-closed">
-    <?php
-    $page_title = 'Home Page';
-    require_once('includes/load.html');
-    // if (!$session->isUserLoggedIn(true) ) {
-    //     redirect('index.html', true);
-    // }
     
-    include_once('layouts/header.html');
-    ?>
-
-    <?php
-    // Database connection
-    $conn = mysqli_connect("localhost", "root", "", "inventory_system");
-
-    // Fetch categories from the database
-    $categoryQuery = "SELECT id, name FROM categories";
-    $categoryResult = mysqli_query($conn, $categoryQuery);
-
-    // Check for database errors
-    if (!$categoryResult) {
-        die("Database error: " . mysqli_error($conn));
-    }
-
-    // Generate dropdown options
-    $categoryOptions = '';
-    while ($categoryRow = mysqli_fetch_assoc($categoryResult)) {
-        $categoryId = $categoryRow['id'];
-        $categoryName = $categoryRow['name'];
-
-        // Add an option element for each category
-        $categoryOptions .= "<option value='$categoryId'>$categoryName</option>";
-    }
-
-    // Handle product search
-    $search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
-    $category = isset($_GET['categorie']) ? $_GET['categorie'] : 'all'; // Get selected category, default to 'all'
-
-    if ($category === 'all' && empty($search)) {
-        // If 'all' category is selected without a search term, retrieve all products
-        $sql = "SELECT p.id, p.name, p.quantity, p.sale_price, p.Description, i.file_name 
-                FROM products AS p
-                LEFT JOIN media AS i ON p.media_id = i.id";
-    } elseif ($category !== 'all' && empty($search)) {
-        // If a specific category is selected without a search term, retrieve products in that category
-        $sql = "SELECT p.id, p.name, p.quantity, p.sale_price, p.Description, i.file_name 
-                FROM products AS p
-                LEFT JOIN media AS i ON p.media_id = i.id
-                WHERE p.categorie_id = '$category'";
-    } elseif (!empty($search)) {
-        // If a search term is provided, handle the search in the selected category or all categories
-        if ($category === 'all') {
-            // Search in all categories
-            $sql = "SELECT p.id, p.name, p.quantity, p.sale_price, p.Description, i.file_name 
-                    FROM products AS p
-                    LEFT JOIN media AS i ON p.media_id = i.id
-                    WHERE p.name LIKE '%$search%'";
-        } else {
-            // Search in a specific category
-            $sql = "SELECT p.id, p.name, p.quantity, p.sale_price, p.Description, i.file_name 
-                    FROM products AS p
-                    LEFT JOIN media AS i ON p.media_id = i.id
-                    WHERE p.name LIKE '%$search%' AND p.categorie_id = '$category'";
-        }
-    }
-
-    $resultset = mysqli_query($conn, $sql) or die("database error:" . mysqli_error($conn));
-    ?>
 
     
     <!-- Add the search form with a category dropdown -->
@@ -101,13 +35,7 @@
     <br>
     <br>
 
-    <?php
-    if (mysqli_num_rows($resultset) > 0) {
-        // Display products if found
-        while ($record = mysqli_fetch_assoc($resultset)) {
-            // Truncate the description to 100 characters
-            $truncatedDescription = strlen($record['Description']) > 100 ? substr($record['Description'], 0, 100) . ' ...' : $record['Description'];
-        ?>
+    
             <div class="card_containerr clickable-div" data-id="<?php echo $record['id']; ?>">
                 <div class="card">
                     <img class="imgg" src="uploads/products/<?php echo $record['file_name']; ?>">
@@ -121,13 +49,7 @@
                     </div>
                 </div>
             </div>
-        <?php
-        }
-    } else {
-        // Display a message if no products are found
-        echo "<p>No products found.</p>";
-    }
-    ?>
+        
 
 <script>
   /* Toggle the sidebar open or closed and update body class */
