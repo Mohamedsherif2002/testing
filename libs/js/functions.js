@@ -12,7 +12,7 @@ function suggetion() {
            // process the form
            $.ajax({
                type        : 'POST',
-               url         : 'ajax.html',
+               url         : 'ajax.php',
                data        : formData,
                dataType    : 'json',
                encode      : true
@@ -50,7 +50,7 @@ function suggetion() {
         // process the form
         $.ajax({
             type        : 'POST',
-            url         : 'ajax.html',
+            url         : 'ajax.php',
             data        : formData,
             dataType    : 'json',
             encode      : true
